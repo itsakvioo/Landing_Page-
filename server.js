@@ -19,11 +19,11 @@ const {
   PUBLIC_BASE_URL
 } = process.env;
 
-const TG = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
+const TG = `https://api.telegram.org/bot${8729647751:AAGurcTfNCqqxiUC1S8KfnK3GltzmpjOsSY}`;
 
 // Endpoint for the frontend to get the Telegram invite link
 app.get('/api/config', (req, res) => {
-  res.json({ inviteLink: TELEGRAM_INVITE_LINK });
+  res.json({ inviteLink:https://t.me/+orrLh7dePj9iOTEx });
 });
 
 // Telegram Webhook Endpoint
@@ -99,7 +99,7 @@ async function sendMetaConversion(userId, tgUser) {
     ],
   };
 
-  const url = `https://graph.facebook.com/v18.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`;
+  const url = `https://graph.facebook.com/v18.0/${1645611606977374}/events?access_token=${EAAWobbhtrHgBSxMPST3l1Q5bryaK1UFjI29jZA0d6uBjDQozIZAHYsY4u78kRlFsXrRGknkFYGQGgYmf5Um25pZC4y0ZCjeq0bA0Ok9sTGIt0aTjPOzAx4eDgNdZCkCelo15VnFAaYrd4qdfbGogxbZAiYDmpp8fpFU4NVx1ZCm4WOqlxSOd7JsZCL8cKkGYaQZDZD}`;
 
   try {
     const r = await fetch(url, {
@@ -116,10 +116,10 @@ async function sendMetaConversion(userId, tgUser) {
 
 // Helper endpoint to register the webhook easily
 app.get('/setup-webhook', async (req, res) => {
-  const base = PUBLIC_BASE_URL;
+  const base = https://app.wwwjaiclub.in;
   if (!base) return res.send('Error: Set PUBLIC_BASE_URL in your environment variables first.');
 
-  const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(TELEGRAM_WEBHOOK_SECRET || '')}`;
+  const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab || '')}`;
 
   try {
     const r = await fetch(`${TG}/setWebhook?url=${encodeURIComponent(url)}`);
