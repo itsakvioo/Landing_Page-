@@ -117,7 +117,7 @@ async function sendMetaConversion(userId, tgUser) {
 // Helper endpoint to register the webhook easily
 app.get('/setup-webhook', async (req, res) => {
   const base = https://app.wwwjaiclub.in;
-  if (!base) return res.send('Error: Set https://app.wwwjaiclub.in in your environment variables first.');
+  if (!base) return res.send('Error: Set app.wwwjaiclub.in in your environment variables first.');
 
   const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab || '')}`;
 
