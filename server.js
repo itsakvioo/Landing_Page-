@@ -130,6 +130,9 @@ app.get('/setup-webhook', async (req, res) => {
   }
 });
 
+  https://api.telegram.org/bot<8729647751:AAGurcTfNCqqxiUC1S8KfnK3GltzmpjOsSY 
+  >/setWebhook?url=https://app.wwwjaiclub.in/webhook/telegram
+
 // Health check endpoint
 app.get('/health', (req, res) => res.send('Server is running!'));
 
