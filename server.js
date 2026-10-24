@@ -8,10 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// THIS IS THE CORRECT WAY: It reads from Render's Environment Variables
+// These pull your secret keys directly from the Render dashboard.
+// DO NOT paste your actual keys here.
 const {
   TELEGRAM_BOT_TOKEN,
-  TELEGRAM_CHANNEL_ID,
   TELEGRAM_WEBHOOK_SECRET,
   META_PIXEL_ID,
   META_ACCESS_TOKEN,
@@ -19,9 +19,9 @@ const {
   PUBLIC_BASE_URL
 } = process.env;
 
-const TG = `https://api.telegram.org/bot${8729647751:AAF_EmUSU2o4UVUyppWEt7A8X6n-qtVJu7s}`;
+const TG = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
-// Endpoint for the frontend to get the Telegram invite link
+// Endpoint for the frontend to get the Telegram invite link (if needed)
 app.get('/api/config', (req, res) => {
   res.json({ inviteLink: TELEGRAM_INVITE_LINK });
 });
@@ -75,6 +75,7 @@ app.post('/webhook/telegram', async (req, res) => {
 async function sendMetaConversion(userId, tgUser) {
   const eventTime = Math.floor(Date.now() / 1000);
 
+  // Hash the Telegram ID for Meta tracking
   const externalId = crypto
     .createHash('sha256')
     .update(String(userId))
