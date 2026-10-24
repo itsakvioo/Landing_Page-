@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Environment variables (Make sure to set these in your hosting dashboard)
+// THIS IS THE CORRECT WAY: It reads from Render's Environment Variables
 const {
   TELEGRAM_BOT_TOKEN,
   TELEGRAM_CHANNEL_ID,
@@ -19,18 +19,18 @@ const {
   PUBLIC_BASE_URL
 } = process.env;
 
-const TG = `https://api.telegram.org/bot${8729647751:AAGurcTfNCqqxiUC1S8KfnK3GltzmpjOsSY}`;
+const TG = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
 // Endpoint for the frontend to get the Telegram invite link
 app.get('/api/config', (req, res) => {
-  res.json({ inviteLink:https://t.me/+orrLh7dePj9iOTEx });
+  res.json({ inviteLink: TELEGRAM_INVITE_LINK });
 });
 
 // Telegram Webhook Endpoint
 app.post('/webhook/telegram', async (req, res) => {
   // 1. Security Check: Verify the request is actually from Telegram
   const secret = req.headers['x-telegram-bot-api-secret-token'];
-  if (141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab && secret !== 141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab) {
+  if (TELEGRAM_WEBHOOK_SECRET && secret !== TELEGRAM_WEBHOOK_SECRET) {
     console.warn('Rejected forged webhook call');
     return res.sendStatus(401);
   }
@@ -75,8 +75,6 @@ app.post('/webhook/telegram', async (req, res) => {
 async function sendMetaConversion(userId, tgUser) {
   const eventTime = Math.floor(Date.now() / 1000);
 
-  // Since Telegram doesn't provide IP/User-Agent, we hash the Telegram ID
-  // Meta uses this as a stable identifier for matching.
   const externalId = crypto
     .createHash('sha256')
     .update(String(userId))
@@ -99,7 +97,7 @@ async function sendMetaConversion(userId, tgUser) {
     ],
   };
 
-  const url = `https://graph.facebook.com/v18.0/${1645611606977374}/events?access_token=${EAAWobbhtrHgBSxMPST3l1Q5bryaK1UFjI29jZA0d6uBjDQozIZAHYsY4u78kRlFsXrRGknkFYGQGgYmf5Um25pZC4y0ZCjeq0bA0Ok9sTGIt0aTjPOzAx4eDgNdZCkCelo15VnFAaYrd4qdfbGogxbZAiYDmpp8fpFU4NVx1ZCm4WOqlxSOd7JsZCL8cKkGYaQZDZD}`;
+  const url = `https://graph.facebook.com/v18.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`;
 
   try {
     const r = await fetch(url, {
@@ -116,10 +114,10 @@ async function sendMetaConversion(userId, tgUser) {
 
 // Helper endpoint to register the webhook easily
 app.get('/setup-webhook', async (req, res) => {
-  const base = app.wwwjaiclub.in;
-  if (!base) return res.send('Error: Set app.wwwjaiclub.in in your environment variables first.');
+  const base = PUBLIC_BASE_URL;
+  if (!base) return res.send('Error: Set PUBLIC_BASE_URL in your environment variables first.');
 
-  const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab || '')}`;
+  const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(TELEGRAM_WEBHOOK_SECRET || '')}`;
 
   try {
     const r = await fetch(`${TG}/setWebhook?url=${encodeURIComponent(url)}`);
@@ -129,9 +127,6 @@ app.get('/setup-webhook', async (req, res) => {
     res.send('Error setting webhook: ' + error.message);
   }
 });
-
-  https://api.telegram.org/bot<8729647751:AAGurcTfNCqqxiUC1S8KfnK3GltzmpjOsSY 
-  >/setWebhook?url=https://app.wwwjaiclub.in/webhook/telegram
 
 // Health check endpoint
 app.get('/health', (req, res) => res.send('Server is running!'));
