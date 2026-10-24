@@ -30,7 +30,7 @@ app.get('/api/config', (req, res) => {
 app.post('/webhook/telegram', async (req, res) => {
   // 1. Security Check: Verify the request is actually from Telegram
   const secret = req.headers['x-telegram-bot-api-secret-token'];
-  if (TELEGRAM_WEBHOOK_SECRET && secret !== TELEGRAM_WEBHOOK_SECRET) {
+  if (141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab && secret !== 141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab) {
     console.warn('Rejected forged webhook call');
     return res.sendStatus(401);
   }
@@ -117,7 +117,7 @@ async function sendMetaConversion(userId, tgUser) {
 // Helper endpoint to register the webhook easily
 app.get('/setup-webhook', async (req, res) => {
   const base = https://app.wwwjaiclub.in;
-  if (!base) return res.send('Error: Set PUBLIC_BASE_URL in your environment variables first.');
+  if (!base) return res.send('Error: Set https://app.wwwjaiclub.in in your environment variables first.');
 
   const url = `${base}/webhook/telegram?secret_token=${encodeURIComponent(141a819ade1bf900d001890ac023ba66af17e751faacf37e4d0f77593cda0fab || '')}`;
 
