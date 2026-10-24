@@ -19,7 +19,7 @@ const {
   PUBLIC_BASE_URL
 } = process.env;
 
-const TG = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
+const TG = `https://api.telegram.org/bot${8729647751:AAF_EmUSU2o4UVUyppWEt7A8X6n-qtVJu7s}`;
 
 // Endpoint for the frontend to get the Telegram invite link
 app.get('/api/config', (req, res) => {
